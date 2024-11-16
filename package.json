@@ -1,0 +1,16 @@
+{
+  "name": "growflow-ethglobal24",
+  "version": "1.0.0",
+  "description": "GrowFlow is a Web3 consumer app that gamifies hydroponics learning while enabling real-world impact. Build virtual systems using NFTs, earn tokens and discounts, and purchase real systems delivered to your home. Upgrade NFTs to reflect ownership, sync real-world data, and receive funds for community projects. 🌱",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "hardhat": "^2.22.15"
+  }
+}
