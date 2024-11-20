@@ -2,7 +2,6 @@
 pragma solidity ^0.8.0;
 import { IMantle } from '@mantlenetworkio/sdk/contracts/IMantle.sol';
 import { IMantleERC20 } from '@mantlenetworkio/sdk/contracts/IMantleERC20.sol';
-import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 
 contract UserManager {
     address public owner;
