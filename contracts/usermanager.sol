@@ -28,8 +28,14 @@ contract UserManager {
         _;
     }
 
-    constructor() {
-        owner = msg.sender;
+   IMantle public mantle;
+
+constructor(address _mantleAddress) {
+    mantle = IMantle(0x78c1b0C915c4FAA5FffA6CAbf0219DA63d7f4cb8);
+    owner = msg.sender;
+}
+
+
     }
 
     // Register a new user
@@ -79,13 +85,6 @@ contract UserManager {
         return users[userAddress];
     }
 }
-IMantle public mantle;
-
-constructor(address _mantleAddress) {
-    mantle = IMantle(0x78c1b0C915c4FAA5FffA6CAbf0219DA63d7f4cb8);
-    owner = msg.sender;
-}
-
 
 
 
