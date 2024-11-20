@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
+import { IMantle } from '@mantlenetworkio/sdk/contracts/IMantle.sol';
+import { IMantleERC20 } from '@mantlenetworkio/sdk/contracts/IMantleERC20.sol';
 import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
 
 contract UserManager {
@@ -55,13 +57,17 @@ contract UserManager {
 
     // Update token balance for a user
     function updateTokenBalance(uint256 amount, bool add) public onlyOwner {
-        if (add) {
-            users[msg.sender].tokenBalance += amount;
-        } else {
-            require(users[msg.sender].tokenBalance >= amount, "Insufficient balance");
-            users[msg.sender].tokenBalance -= amount;
-        }
+    IMantleERC20 mantleToken = IMantleERC20(mantle.getERC20Token());
+    if (add) {
+        mantleToken.deposit(msg.sender, amount);
+        users[msg.sender].tokenBalance += amount;
+    } else {
+        require(users[msg.sender].tokenBalance >= amount, "Insufficient balance");
+        mantleToken.withdraw(msg.sender, amount);
+        users[msg.sender].tokenBalance -= amount;
     }
+}
+
 
     // Get user profile
     function getUserProfile(address userAddress) 
@@ -73,6 +79,13 @@ contract UserManager {
         return users[userAddress];
     }
 }
+IMantle public mantle;
+
+constructor(address _mantleAddress) {
+    mantle = IMantle(0x78c1b0C915c4FAA5FffA6CAbf0219DA63d7f4cb8);
+    owner = msg.sender;
+}
+
 
 
 
